@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "qotd.db",
+            "name": "qotd"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

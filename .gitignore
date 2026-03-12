@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+qotd.db
+qotd.db-wal
+qotd.db-shm
+.DS_Store

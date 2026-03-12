@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(chmod +x /Users/ahmadfamily/Documents/Repository/question-of-the-day/import_questions.py)"
+    ]
+  }
+}
