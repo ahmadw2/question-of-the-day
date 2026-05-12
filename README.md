@@ -164,6 +164,20 @@ python bot.py
 
 **Raspberry Pi** — great for a small always-on community bot. No monthly cost, runs 24/7, extremely low power usage.
 
+The bot runs as a systemd service (`qotd.service`). To deploy updates:
+
+```bash
+git pull
+sudo systemctl restart qotd
+```
+
+To check status or view logs:
+
+```bash
+sudo systemctl status qotd
+sudo journalctl -u qotd -f
+```
+
 **Cloud (e.g. Railway)** — runs the bot continuously with minimal setup. Good if you don't want to manage hardware.
 
 ---
