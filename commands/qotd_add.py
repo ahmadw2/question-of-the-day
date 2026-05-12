@@ -84,9 +84,9 @@ class QOTDAdd(commands.Cog):
         for s in subs:
             preview = s["question_text"][:50] + "..." if s["question_text"] and len(s["question_text"]) > 50 else s["question_text"]
             if preview:
-                lines.append(f"• {preview}")
+                lines.append(f"• (ID: {s['id']}) {preview}")
             else:
-                lines.append(f"• *(image)*")
+                lines.append(f"• (ID: {s['id']}) *(image)*")
 
         # Ephemeral messages have a 2000 char limit, so truncate if needed
         output = "\n".join(lines)

@@ -120,6 +120,22 @@ def clear_removal_record(guild_id: int, user_id: int):
     conn.close()
 
 
+def update_submission(submission_id: int, question_text: Optional[str] = None, image_url: Optional[str] = None):
+    conn = get_connection()
+    sub = conn.execute("SELECT * FROM submissions WHERE id = ?", (submission_id,)).fetchone()
+    if not sub:
+        conn.close()
+        return
+    new_text = question_text if question_text is not None else sub["question_text"]
+    new_image = image_url if image_url is not None else sub["image_url"]
+    conn.execute(
+        "UPDATE submissions SET question_text = ?, image_url = ? WHERE id = ?",
+        (new_text, new_image, submission_id),
+    )
+    conn.commit()
+    conn.close()
+
+
 def get_user_submissions(guild_id: int, user_id: int) -> List[Dict]:
     conn = get_connection()
     rows = conn.execute(
@@ -339,21 +355,6 @@ def get_channel_id(guild_id: int) -> Optional[int]:
     ).fetchone()
     conn.close()
     return row["qotd_channel_id"] if row else None
-
-
-def cleanup_old_posted(days: int = 7) -> int:
-    """Delete posted submissions older than the given number of days.
-    Returns the number of rows deleted.
-    """
-    conn = get_connection()
-    cur = conn.execute(
-        "DELETE FROM submissions WHERE posted = 1 AND posted_at <= datetime('now', ? || ' days')",
-        (str(-days),),
-    )
-    deleted = cur.rowcount
-    conn.commit()
-    conn.close()
-    return deleted
 
 
 def set_channel_id(guild_id: int, channel_id: int):
