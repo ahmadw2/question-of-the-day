@@ -92,9 +92,8 @@ class DailyPost(commands.Cog):
 
     @tasks.loop(time=time(hour=0, minute=0, tzinfo=ZoneInfo("America/Los_Angeles")))
     async def daily_qotd(self):
-        """Post QOTD at midnight Pacific time, then clean up old posts."""
+        """Post QOTD at midnight Pacific time."""
         await post_qotd(self.bot, config.GUILD_ID)
-        models.cleanup_old_posted(days=7)
 
     @daily_qotd.before_loop
     async def before_daily(self):
