@@ -82,9 +82,8 @@ class QOTDAdd(commands.Cog):
 
         lines = []
         for s in subs:
-            preview = s["question_text"][:50] + "..." if s["question_text"] and len(s["question_text"]) > 50 else s["question_text"]
-            if preview:
-                lines.append(f"• (ID: {s['id']}) {preview}")
+            if s["question_text"]:
+                lines.append(f"• (ID: {s['id']}) {s['question_text']}")
             else:
                 lines.append(f"• (ID: {s['id']}) *(image)*")
 
